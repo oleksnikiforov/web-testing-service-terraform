@@ -17,11 +17,11 @@ resource "aws_s3_bucket" "web_testing_service_buckets" {
 
   bucket = var.bucket_list[count.index]
 
-  acl = "private"  # You can adjust the ACL as needed
+  acl = "private"
 }
 
 
-resource "aws_iam_user_policy_attachment" "s3_read_only_policy_attachment" {
+resource "aws_iam_user_policy_attachment" "s3_full_access_policy_attachment" {
   count = length(var.bucket_list)
   policy_arn = aws_iam_policy.s3_full_access_policy[count.index].arn
   user      =  aws_iam_user.web_testing_service_user.name
